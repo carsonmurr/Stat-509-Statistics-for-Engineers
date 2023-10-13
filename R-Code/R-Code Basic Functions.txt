@@ -1,0 +1,44 @@
+Basic R-Code Commands
+
+
+**USE THIS LINE BEFORE STARTING
+library(MASS)
+
+READING IN DATA
+**MAKE SURE THE PRESENT WORKING DIRECTORY IS UPDATAED TO WHERE THE FILE IS
+<<name_of_data>>=read.csv("<<name>>.csv")[,-1]
+**UPDATE LENGTH
+n=length(<<name_of_data>>)
+Example:
+test1=read.csv("a.csv")[,-1]   the data is named "test1" and the file name is a.csv
+n=length(test1)
+
+FITTING DATA
+fitdistr(<<name_of_data>>,"<<distribution_name>>")
+*disturbution_name possiblities: "gamma", "weibull", "normal", "exponential"	
+Example:
+fitdistr(test1, "gamma")
+
+QQPLOT WITH LINE
+qqplot(<<distribution_name>>(seq(.025,.975,by=1/n),<<parameter1>>,<<paramter2>>),<<name_of_data>>)
+lines(c(0,100),c(0,100),col="red")
+distribution_names possibilites: "qweibull", "qgamma", "qnorm", "qexp"
+Example:
+qqplot(qgamma(seq(.025,.975,by=1/n),0.98437513,0.48195112),test1)
+lines(c(0,100),c(0,100),col="red")
+
+
+HISTOGRAM WITH FUNCTION CURVE **USE HISTOGRAM TO DECIDE WHICH QQPLOT TO FORM
+hist(<<name_of_data>>,freq=F)
+y=function(x){<<distribution_names>>(x,<<paramter1>>,<<paramter2>>)}
+curve(y,add=T)
+*distribution_names possibilites: "dgamma", "dnorm", "dweibull","dexp"
+Example:
+hist(test1,freq=F)
+y=function(x){dgamma(x,0.98437513,0.48195112)}
+curve(y,add=T)
+
+QQPLOT OF NORMAL DISTRIBUTION
+qqplot(<<name_of_data>>)
+Example:
+qqplot(test1)

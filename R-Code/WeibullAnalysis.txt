@@ -1,0 +1,23 @@
+#Weibull Analysis
+
+data = c(3.9,4.2,5.4,6.5,7.0,8.8,9.2,11.4,14.3,15.1,15.3,15.5,17.9,
+18.0,19.0,19.0,23.9,24.8,26.0,34.2)
+
+n=length(data)
+library(MASS)
+
+fitdistr(data,"gamma")
+
+qqplot(qgamma(seq(.025,.975,by=1/n),0.98437513,0.48195112),data)
+lines(c(0,100),c(0,100),col="red")
+
+hist(data,freq=F)
+y=function(x){dgamma(x,0.98437513,0.48195112)}
+curve(y,add=T)
+
+
+#New Data
+
+data=read.csv("C:\\Users\\cmurr\\OneDrive\\Desktop\\data.csv")[,-1]
+a=read.csv("C:\\Users\\cmurr\\OneDrive\\Desktop\\a.csv")[,-1]
+b=read.csv("C:\\Users\\cmurr\\OneDrive\\Desktop\\b.csv")[,-1]
